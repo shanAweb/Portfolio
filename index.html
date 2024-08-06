@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://kit.fontawesome.com/8ae794a3e9.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!--Home Page-->
+    <div id="header">
+      <div class="container">
+        <nav>
+          <img src="./Images/ShanAsif.png" alt="LOGO" class="logo" />
+          <ul>
+            <li><a href="#header">Home</a></li>
+            <li><a href="#about">About me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contacts</a></li>
+            <li><a href="#mySQL">mySQL</a></li>
+          </ul>
+        </nav>
+        <div class="header-text">
+          <p>Web Developer</p>
+          <h1>Hi, I'm <span>Shan Asif</span></h1>
+        </div>
+      </div>
+    </div>
+    <!--About Page-->
+    <div id="about">
+      <div class="container">
+        <div class="row">
+          <div class="about-col-1">
+            <img src="./Images/backgroundHeader.png" alt="User pic" />
+          </div>
+          <div class="about-col-2">
+            <h1 class="sub-title">About Me</h1>
+            <p>I am a hardworking individual who is studying in a well reputed university of Pakistan. My goal is make myself competetive for growing and grooming tech industry to make my mark.</p>
+            <div class="tab-titles">
+              <p class="tab-links active-link" onclick="opentab('experience')">Experience</p>
+              <p class="tab-links" onclick="opentab('education')">Education</p>
+            </div>
+            <div class="tab-contents active-tab" id="experience">
+              <ul>
+                <li><span>2019-Current</span><br />Coordinator</li>
+                <li><span>2023-Current</span><br />Web Developer-Freelancing</li>
+              </ul>
+            </div>
+            <div class="tab-contents" id="education">
+              <ul>
+                <li><span>2021-2025</span><br />Bachelors of Science in Computer Sciene <br />University of Central Punjab</li>
+                <li><span>2019-2021</span><br />Intermediate in Computer Science <br />Govt College W.R Lahore</li>
+                <li><span>2017-2019</span><br />Matric Exam <br />MTI High School</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Skills Page-->
+    <div id="skills">
+      <div class="container">
+        <h1 class="sub-title">My Skills</h1>
+        <div class="content">
+          <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: 100">
+            <h1 style="color: #eb7893; font-size: 18px">HTML</h1>
+          </div>
+          <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: 88">
+            <h1 style="color: #eb7893; font-size: 18px">CSS</h1>
+          </div>
+          <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: 74">
+            <h1 style="color: #eb7893; font-size: 18px">JS</h1>
+          </div>
+          <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: 69">
+            <h1 style="color: #eb7893; font-size: 18px">Python</h1>
+          </div>
+          <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: 79">
+            <h1 style="color: #eb7893; font-size: 18px">PHP</h1>
+          </div>
+          <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: 92">
+            <h1 style="color: #eb7893; font-size: 18px">mySQL</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Projects-->
+    <div id="projects">
+      <div class="container">
+        <h1 class="sub-title">My Projects</h1>
+        <div class="work-list">
+          <div class="work">
+            <img src="./Images/calculator.avif" alt="Library Project image" width="500px" height="500px" />
+            <div class="layer">
+              <h3>Calculator Web APP</h3>
+              <p>A Calculator developed using HTML, CSS and JavaScript. There can be addition, Multiplication, Substraction and Divison using this calculator.</p>
+              <a href="https://github.com/shanAweb/HTML_CSS_JavaScript/tree/main/Calculator" target="_blank"><i class="fa-solid fa-up-right-from-square"></i> </a>
+            </div>
+          </div>
+          <div class="work">
+            <img src="./Images/weather.jfif" alt="Library Project image" width="500px" height="300px" />
+            <div class="layer">
+              <h3>Weather Forecast</h3>
+              <p>This project uses APIs and return live weather. It is designed using HTMl, CSS and JavaScript.</p>
+              <a href="https://github.com/shanAweb/HTML_CSS_JavaScript/tree/main/Weather%20Forecast" target="_blank"><i class="fa-solid fa-up-right-from-square"></i> </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Contact Page-->
+    <div id="contact">
+      <div class="container">
+        <div class="contact-left">
+          <h1 class="sub-title">Contact Me</h1>
+          <p><i class="fa-regular fa-paper-plane"></i> shan@email</p>
+          <p><i class="fa-solid fa-phone"></i> 0123445670</p>
+          <div class="social-icons">
+            <a href="https://github.com/shanAweb" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/shan-asif-b697b1238/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
+          </div>
+          <a href="myCV.docx" download class="btn btn2">Download CV<i class="fa-solid fa-download"></i></a>
+        </div>
+        <div class="contact-right">
+          <form action="contact.php" method="post">
+            <input type="text" name="Name" placeholder="Your name" required />
+            <input type="email" name="Email" placeholder="Your Email" required />
+            <button type="submit" class="btn btn2">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      var tablinks = document.getElementsByClassName("tab-links");
+      var tabcontents = document.getElementsByClassName("tab-contents");
+      function opentab(tabname) {
+        for (tablink of tablinks) {
+          tablink.classList.remove("active-link");
+        }
+        for (tabcontent of tabcontents) {
+          tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+      }
+    </script>
+  </body>
+</html>
