@@ -1,34 +1,19 @@
-name: Push-to-EC2
+name: CI/CD Pipeline
 
-# Trigger deployment only on push to main branch
 on:
   push:
     branches:
       - main
 
 jobs:
-  deploy:
-    name: Deploy to EC2 on main branch push
-    runs-on: ubuntu-latest
+  build:
+    runs-on: self-hosted
 
     steps:
-      - name: Checkout the files
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Deploy to Server 1
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
-
-      - name: Executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@v0.1.5
-        with:
-          host: ${{ secrets.HOST_DNS }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            cd /var/www/html/Portfolio
-            git pull 
+    - name: Deploy
+      run: |
+        cd /var/www/html/Portfolio
+        git pull
