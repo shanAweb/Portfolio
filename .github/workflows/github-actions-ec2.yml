@@ -13,7 +13,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Fix Permissions
+      run: sudo chown -R ubuntu:ubuntu /var/www/html/Portfolio
+
+    - name: Pull Latest Code
+      run: |
+        cd /var/www/html/Portfolio
+        git pull
+
     - name: Deploy
       run: |
         cd /var/www/html/Portfolio
         git pull
+
