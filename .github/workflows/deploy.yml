@@ -1,0 +1,46 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # or the branch you want to trigger the workflow
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Cache Docker layers
+        uses: docker/cache-action@v2
+        with:
+          path: /tmp/.buildx-cache
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-portfolio-image .
+
+      - name: Deploy to EC2
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        run: |
+          # Install SSH client
+          sudo apt-get update
+          sudo apt-get install -y openssh-client
+
+          # Set up SSH key
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          # Deploy to EC2
+          ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-ip << 'EOF'
+            docker stop portfolio-container || true
+            docker rm portfolio-container || true
+            docker run -d --name portfolio-container -p 80:80 my-portfolio-image
+          EOF
