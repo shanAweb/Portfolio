@@ -26,22 +26,5 @@ jobs:
         run: |
           docker build -t my-portfolio-image .
 
-      - name: Deploy to EC2
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-        run: |
-          # Install SSH client if not already installed
-          sudo apt-get update
-          sudo apt-get install -y openssh-client
-
-          # Set up SSH key
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-
-          # Deploy to EC2
-          ssh -o StrictHostKeyChecking=no ec2-user@3.107.83.248 << 'EOF'
-            docker stop portfolio-container || true
-            docker rm portfolio-container || true
             docker run -d --name portfolio-container -p 80:80 my-portfolio-image
           EOF
