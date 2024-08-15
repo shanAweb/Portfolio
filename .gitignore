@@ -1,0 +1,9 @@
+# Ignore Docker-related files
+.dockerignore
+
+# Ignore node_modules if you're using Node.js
+node_modules/
+
+# Ignore logs and other temporary files
+*.log
+tmp/
