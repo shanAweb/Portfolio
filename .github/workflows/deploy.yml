@@ -34,7 +34,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
 
           # Deploy to EC2
-          ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-ip << 'EOF'
+          #ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-ip << 'EOF'
             docker stop portfolio-container || true
             docker rm portfolio-container || true
             docker run -d --name portfolio-container -p 80:80 my-portfolio-image
