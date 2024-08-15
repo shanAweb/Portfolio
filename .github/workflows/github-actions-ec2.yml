@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Deploy Static Portfolio
 
 on:
   push:
@@ -7,13 +7,17 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    - name: Deploy
+    - name: Build Docker image
+      run: docker build -t portfolio .
+
+    - name: Deploy locally or to a service
       run: |
-        cd /var/www/html/Portfolio
-        git pull
+        docker run -d -p 8080:80 portfolio
+        # Alternatively, deploy to a service like AWS S3 or GitHub Pages
+
