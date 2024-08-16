@@ -1,20 +1,28 @@
-name: CI/CD Pipeline
+name: Deploy Dockerized Portfolio to EC2
 
 on:
   push:
     branches:
-      - main  # or the branch you want to trigger the workflow
+      - main  # Trigger deployment on push to the main branch
 
 jobs:
-  build-and-deploy:
-    runs-on: self-hosted  # Use the self-hosted runner
+  deploy:
+    runs-on: self-hosted  # Specify that this job runs on a self-hosted runner
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Build Docker image
-        run: |
-          docker build -t my-portfolio-image .
-          docker run -d --name portfolio-container -p 80:80 my-portfolio-image
+    - name: Build Docker Image
+      run: docker build -t my-portfolio:latest .
 
+    - name: Stop existing Docker container
+      run: |
+        CONTAINER_ID=$(docker ps -q --filter "name=my-portfolio")
+        if [ -n "$CONTAINER_ID" ]; then
+          docker stop $CONTAINER_ID && docker rm $CONTAINER_ID
+        fi
+
+    - name: Run Docker Container
+      run: |
+        docker run -d --name my-portfolio -p 80:80 my-portfolio:latest
