@@ -13,6 +13,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Restart GitHub Actions Runner Service
+      run: |
+        sudo ./svc.sh stop
+        sudo ./svc.sh start
+      working-directory: /home/ubuntu/actions-runner  # Adjust if the runner directory is different
+
     - name: Set up Docker Buildx
       run: |
         docker buildx create --use
@@ -31,4 +37,3 @@ jobs:
     - name: Run Docker Container
       run: |
         docker run -d --name my-portfolio -p 80:80 my-portfolio:latest
-
