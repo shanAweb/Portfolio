@@ -2,7 +2,10 @@
 FROM php:8.1-fpm
 
 # Install Nginx
-RUN apt-get update && apt-get install -y nginx
+RUN apt-get update && \
+    apt-get install -y nginx && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Remove the default Nginx configuration file
 RUN rm /etc/nginx/sites-enabled/default
@@ -17,8 +20,8 @@ COPY . /var/www/html/
 WORKDIR /var/www/html/
 
 # Ensure proper permissions for the web server
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html
 
 # Expose port 80 for the web server
 EXPOSE 80
