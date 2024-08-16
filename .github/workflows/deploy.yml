@@ -13,15 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Stop GitHub Actions Runner Service
-        run: |
-          sudo ./svc.sh stop
-        working-directory: /home/ubuntu/actions-runner
-
-      - name: Start GitHub Actions Runner Service
-        run: |
-          sudo ./svc.sh start
-        working-directory: /home/ubuntu/actions-runner
+      
 
       - name: Set up Docker Buildx
         run: |
