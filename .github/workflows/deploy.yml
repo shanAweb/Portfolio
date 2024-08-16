@@ -10,30 +10,30 @@ jobs:
     runs-on: self-hosted  # Specify that this job runs on a self-hosted runner
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Restart GitHub Actions Runner Service
-      run: |
-        sudo ./svc.sh stop
-        sudo ./svc.sh start
-      working-directory: /home/ubuntu/actions-runner  # Adjust if the runner directory is different
+      - name: Restart GitHub Actions Runner Service
+        run: |
+          sudo ./svc.sh stop || true
+          sudo ./svc.sh start || true
+        working-directory: /home/ubuntu/actions-runner
 
-    - name: Set up Docker Buildx
-      run: |
-        docker buildx create --use
+      - name: Set up Docker Buildx
+        run: |
+          docker buildx create --use
 
-    - name: Build Docker Image
-      run: |
-        docker buildx build -t my-portfolio:latest .
+      - name: Build Docker Image
+        run: |
+          docker buildx build -t my-portfolio:latest .
 
-    - name: Stop existing Docker container
-      run: |
-        CONTAINER_ID=$(docker ps -q --filter "name=my-portfolio")
-        if [ -n "$CONTAINER_ID" ]; then
-          docker stop $CONTAINER_ID && docker rm $CONTAINER_ID
-        fi
+      - name: Stop existing Docker container
+        run: |
+          CONTAINER_ID=$(docker ps -q --filter "name=my-portfolio")
+          if [ -n "$CONTAINER_ID" ]; then
+            docker stop $CONTAINER_ID && docker rm $CONTAINER_ID
+          fi
 
-    - name: Run Docker Container
-      run: |
-        docker run -d --name my-portfolio -p 80:80 my-portfolio:latest
+      - name: Run Docker Container
+        run: |
+          docker run -d --name my-portfolio -p 80:80 my-portfolio:latest
