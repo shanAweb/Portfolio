@@ -32,4 +32,4 @@ jobs:
 
       - name: Run Docker Container
         run: |
-          docker run -d --name my-portfolio -p 80:80 my-portfolio
+          docker run -d --name my-portfolio -p 80:80
