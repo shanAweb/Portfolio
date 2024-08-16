@@ -13,21 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      
-
       - name: Set up Docker Buildx
         run: |
           docker buildx create --use
+          docker buildx inspect --bootstrap  # Ensure Buildx is ready
 
       - name: Build Docker Image
         run: |
-          docker buildx build -t my-portfolio .
+          docker buildx build -t my-portfolio --load .  # Use --load to make the image available locally
 
-      - name: Stop existing Docker container
+      - name: Stop and Remove Existing Docker Container
         run: |
           CONTAINER_ID=$(docker ps -q --filter "name=my-portfolio")
           if [ -n "$CONTAINER_ID" ]; then
-            docker stop $CONTAINER_ID && docker rm $CONTAINER_ID
+            docker stop $CONTAINER_ID
+            docker rm $CONTAINER_ID
           fi
 
       - name: Run Docker Container
