@@ -13,8 +13,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Set up Docker Buildx
+      run: |
+        docker buildx create --use
+
     - name: Build Docker Image
-      run: docker build -t my-portfolio .
+      run: |
+        docker buildx build -t my-portfolio:latest .
 
     - name: Stop existing Docker container
       run: |
@@ -26,3 +31,4 @@ jobs:
     - name: Run Docker Container
       run: |
         docker run -d --name my-portfolio -p 80:80 my-portfolio:latest
+
